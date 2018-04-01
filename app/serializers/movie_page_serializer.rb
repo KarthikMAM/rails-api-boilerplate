@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MoviePageSerializer < Serializer
   PROPS = MovieSerializer::PROPS.deep_merge(
     include: {

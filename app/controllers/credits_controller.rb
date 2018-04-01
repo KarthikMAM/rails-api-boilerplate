@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreditsController < ApplicationController
   before_action :set_credit, only: %i[show update destroy]
 

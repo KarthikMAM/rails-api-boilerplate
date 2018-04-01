@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersonPageSerializer < Serializer
   PROPS = PersonSerializer::PROPS.deep_merge(
     include: {

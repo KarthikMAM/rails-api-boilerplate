@@ -1,0 +1,10 @@
+Style/Documentation:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Rails:
+  Enabled: true
+AllCops:
+  TargetRubyVersion: 2.4.0
