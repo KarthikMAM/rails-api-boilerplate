@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  web:
+    build: .
+    command: rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/test_api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - RAILS_ENV=production
+      - DATABASE_URL=postgres://postgres@db/test_api_production
+      - SECRET_KEY_BASE=hellda5785bfefe2d1a0e3e4832a295f871f8425696d36dee5aadd1f7297ff5bc392fa3adc295008b158554ca3adfdcbff2738cafe5a9b61859d0c5a24fbb8ddd7beowo
+      - RAILS_LOG_TO_STDOUT=true
