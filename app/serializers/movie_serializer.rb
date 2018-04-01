@@ -9,7 +9,8 @@
 #  updated_at   :datetime         not null
 #
 
-class MovieSerializer
-  include FastJsonapi::ObjectSerializer
+class MovieSerializer < Serializer
   attributes :name, :release_date
+
+  has_many :credits
 end

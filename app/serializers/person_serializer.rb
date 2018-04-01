@@ -9,7 +9,8 @@
 #  updated_at :datetime         not null
 #
 
-class PersonSerializer
-  include FastJsonapi::ObjectSerializer
+class PersonSerializer < Serializer
   attributes :name, :dob
+
+  has_many :credits
 end
