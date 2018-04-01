@@ -1,12 +1,9 @@
 class PersonPageSerializer < Serializer
-  PROPS = PersonSerializer::PROPS.deep_merge({
+  PROPS = PersonSerializer::PROPS.deep_merge(
     include: {
       credits: PersonCreditsSerializer::PROPS
     }
-  }).freeze
+  ).freeze
 
-
-  SHAPE = PersonSerializer::SHAPE.deep_merge({
-    credits: PersonCreditsSerializer::SHAPE
-  }).freeze
+  SHAPE = PersonSerializer::SHAPE.deep_merge(credits: PersonCreditsSerializer::SHAPE).freeze
 end

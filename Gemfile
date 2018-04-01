@@ -26,6 +26,9 @@ gem 'puma', '~> 3.7'
 # Fast JSON API for JSON serialization
 gem 'fast_jsonapi'
 
+# Use OJ Gem for Serialization
+gem 'oj'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

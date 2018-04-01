@@ -6,7 +6,6 @@ class PersonCreditsSerializer < Serializer
     only: %i[id]
   }.freeze
 
-
   SHAPE = {
     movie: MovieSerializer::SHAPE
   }.freeze

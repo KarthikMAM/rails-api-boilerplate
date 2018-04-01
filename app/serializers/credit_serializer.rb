@@ -29,7 +29,6 @@ class CreditSerializer < Serializer
     only: %i[id]
   }.freeze
 
-
   SHAPE = {
     person: PersonSerializer::SHAPE,
     movie: MovieSerializer::SHAPE
