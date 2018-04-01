@@ -21,6 +21,17 @@
 #
 
 class CreditSerializer < Serializer
-  belongs_to :movie
-  belongs_to :person
+  PROPS = {
+    include: {
+      person: PersonSerializer::PROPS,
+      movie: MovieSerializer::PROPS
+    },
+    only: %i[id]
+  }.freeze
+
+
+  SHAPE = {
+    person: PersonSerializer::SHAPE,
+    movie: MovieSerializer::SHAPE
+  }.freeze
 end

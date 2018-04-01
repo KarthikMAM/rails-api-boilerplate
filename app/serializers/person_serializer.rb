@@ -10,7 +10,9 @@
 #
 
 class PersonSerializer < Serializer
-  attributes :name, :dob
+  PROPS = {
+    only: %i[id name dob]
+  }.freeze
 
-  has_many :credits
+  SHAPE = {}.freeze
 end

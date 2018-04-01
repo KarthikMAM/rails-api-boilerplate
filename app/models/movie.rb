@@ -12,7 +12,5 @@
 class Movie < ApplicationRecord
   validates :name, presence: true
 
-  def as_json(_options = {})
-    super(only: %i[name release_date id])
-  end
+  has_many :credits, dependent: :destroy
 end

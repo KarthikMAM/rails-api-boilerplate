@@ -10,7 +10,9 @@
 #
 
 class MovieSerializer < Serializer
-  attributes :name, :release_date
+  PROPS = {
+    only: %i[id name release_date]
+  }.freeze
 
-  has_many :credits
+  SHAPE = {}.freeze
 end

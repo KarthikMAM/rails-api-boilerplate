@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   def index
     @people = Person.all
 
-    render json: PersonSerializer.new(@people).serialized_json
+    render json: @people.includes(PersonPageSerializer::SHAPE).as_json(PersonPageSerializer::PROPS)
   end
 
   # GET /people/1

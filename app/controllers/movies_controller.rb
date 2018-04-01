@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
 
-    render json: MovieSerializer.new(@movies).serialized_json
+    render json: @movies.includes(MoviePageSerializer::SHAPE).as_json(MoviePageSerializer::PROPS)
   end
 
   # GET /movies/1

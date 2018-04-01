@@ -5,7 +5,7 @@ class CreditsController < ApplicationController
   def index
     @credits = Credit.all
 
-    render json: @credits
+    render json: @credits.includes(CreditSerializer::SHAPE).as_json(CreditSerializer::PROPS)
   end
 
   # GET /credits/1
