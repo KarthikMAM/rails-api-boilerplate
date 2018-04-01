@@ -23,31 +23,40 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe PeopleController, type: :controller do
+RSpec.describe CreditsController, type: :controller do
+  let(:person_1) { create :person }
+  let(:person_2) { create :person }
+  let(:person_3) { create :person }
+
+  let(:movie_1) { create :movie }
+  let(:movie_2) { create :movie }
+  let(:movie_3) { create :movie }
+
   # This should return the minimal set of attributes required to create a valid
-  # Person. As you add validations to Person, be sure to
+  # Credit. As you add validations to Credit, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     {
-      name: 'Hello',
-      dob: 20.years.ago
+      person_id: person_1.id,
+      movie_id: movie_1.id
     }
   end
 
   let(:invalid_attributes) do
     {
-      name: nil
+      person_id: nil,
+      movie_id: nil
     }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # PeopleController. Be sure to keep this updated too.
+  # CreditsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe 'GET #index' do
     it 'returns a success response' do
-      person = Person.create! valid_attributes
+      credit = Credit.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
@@ -55,31 +64,31 @@ RSpec.describe PeopleController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      person = Person.create! valid_attributes
-      get :show, params: { id: person.to_param }, session: valid_session
+      credit = Credit.create! valid_attributes
+      get :show, params: { id: credit.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe 'POST #create' do
     context 'with valid params' do
-      it 'creates a new Person' do
+      it 'creates a new Credit' do
         expect do
-          post :create, params: { person: valid_attributes }, session: valid_session
-        end.to change(Person, :count).by(1)
+          post :create, params: { credit: valid_attributes }, session: valid_session
+        end.to change(Credit, :count).by(1)
       end
 
-      it 'renders a JSON response with the new person' do
-        post :create, params: { person: valid_attributes }, session: valid_session
+      it 'renders a JSON response with the new credit' do
+        post :create, params: { credit: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(person_url(Person.last))
+        expect(response.location).to eq(credit_url(Credit.last))
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the new person' do
-        post :create, params: { person: invalid_attributes }, session: valid_session
+      it 'renders a JSON response with errors for the new credit' do
+        post :create, params: { credit: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -90,31 +99,33 @@ RSpec.describe PeopleController, type: :controller do
     context 'with valid params' do
       let(:new_attributes) do
         {
-          name: 'Karthik'
+          movie_id: movie_3.id,
+          person_id: person_2.id
         }
       end
 
-      it 'updates the requested person' do
-        person = Person.create! valid_attributes
-        put :update, params: { id: person.to_param, person: new_attributes }, session: valid_session
-        person.reload
-        expect(person.name).to eql('Karthik')
+      it 'updates the requested credit' do
+        credit = Credit.create! valid_attributes
+        put :update, params: { id: credit.to_param, credit: new_attributes }, session: valid_session
+        credit.reload
+        expect(credit.person).to eql(person_2)
+        expect(credit.movie).to eql(movie_3)
       end
 
-      it 'renders a JSON response with the person' do
-        person = Person.create! valid_attributes
+      it 'renders a JSON response with the credit' do
+        credit = Credit.create! valid_attributes
 
-        put :update, params: { id: person.to_param, person: valid_attributes }, session: valid_session
+        put :update, params: { id: credit.to_param, credit: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the person' do
-        person = Person.create! valid_attributes
+      it 'renders a JSON response with errors for the credit' do
+        credit = Credit.create! valid_attributes
 
-        put :update, params: { id: person.to_param, person: invalid_attributes }, session: valid_session
+        put :update, params: { id: credit.to_param, credit: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -122,11 +133,11 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested person' do
-      person = Person.create! valid_attributes
+    it 'destroys the requested credit' do
+      credit = Credit.create! valid_attributes
       expect do
-        delete :destroy, params: { id: person.to_param }, session: valid_session
-      end.to change(Person, :count).by(-1)
+        delete :destroy, params: { id: credit.to_param }, session: valid_session
+      end.to change(Credit, :count).by(-1)
     end
   end
 end

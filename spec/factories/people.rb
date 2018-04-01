@@ -1,6 +1,17 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  dob        :date
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 FactoryBot.define do
   factory :person do
-    name "MyString"
-    dob "2018-04-01"
+    name { FFaker::Name.name }
+    dob { FFaker::Time.date }
   end
 end

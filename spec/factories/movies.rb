@@ -11,5 +11,7 @@
 
 FactoryBot.define do
   factory :movie do
+    name { FFaker::Name.name }
+    release_date { FFaker::Time.date }
   end
 end
